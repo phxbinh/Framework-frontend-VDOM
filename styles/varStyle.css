@@ -1,0 +1,117 @@
+:root {
+  color-scheme: light dark;
+
+  /* Base colors */
+  --bg: #ffffff;
+  --text: #111111;
+  --border: #dddddd;
+  --surface: #f9f9f9;
+  --muted: #555555;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  /* Accent palette */
+  --primary: #007bff;
+  --primary-text: #ffffff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --warning: #ffc107;
+  --error: #dc3545;
+
+  /* Code block */
+  --code-bg: #1e1e1e;
+  --code-text: #d4d4d4;
+
+  /* Motion */
+  --transition-fast: 0.2s ease;
+  --transition-slow: 0.4s ease;
+
+  --transition-slow-out: 0.4s ease-out;
+  --transition-fast-out: 0.2s ease-out;
+
+  /* Typography scale */
+  --font-body: "Inter", "Segoe UI", "Noto Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --line-height: 1.65;
+
+  /* TOC height */
+  --toc-height: 280px;
+
+  /* padding */
+  --app-padding: 10px;
+}
+
+html.transition-theme {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ===== 🌙 DARK MODE (Auto) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e1e1e;
+    --text: #eeeeee;
+    --border: #444444;
+    --surface: #252526;
+    --muted: #aaaaaa;
+    --shadow: rgba(0, 0, 0, 0.6);
+
+    --primary: #3d8bfd;
+    --primary-text: #ffffff;
+    --secondary: #999999;
+    --success: #4cd964;
+    --warning: #ffd60a;
+    --error: #ff4d4d;
+
+    --code-bg: #2d2d2d;
+    --code-text: #dcdcdc;
+  }
+}
+
+/* ===  🎚️ MANUAL THEME OVERRIDE ===== */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1e1e1e;
+  --text: #eeeeee;
+  --border: #444444;
+  --surface: #252526;
+  --muted: #aaaaaa;
+/*
+  --shadow: rgba(0, 50, 60, 0.6);
+*/
+/* dark */
+  --shadow: rgba(255, 255, 255, 0.12);
+
+  --primary: #3d8bfd;
+  --primary-text: #ffffff;
+  --secondary: #999999;
+  --success: #4cd964;
+  --warning: #ffd60a;
+  --error: #ff4d4d;
+
+  --code-bg: #2d2d2d;
+  --code-text: #dcdcdc;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --text: #111111;
+  --border: #dddddd;
+  --surface: #f9f9f9;
+  --muted: #666666;
+  --shadow: rgba(0, 10, 0, 0.1);
+
+  --primary: #007bff;
+  --primary-text: #ffffff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --warning: #ffc107;
+  --error: #dc3545;
+
+  --code-bg: #1e1e1e;
+  --code-text: #d4d4d4;
+}
+
+
+
+
