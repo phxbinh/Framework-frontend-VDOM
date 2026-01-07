@@ -1,0 +1,33 @@
+/* CSS back to top */
+
+  #top-sentinel {
+    position: absolute;
+    top: 80vh;
+    left: 0;
+    height: 1px;
+    width: 1px;
+    pointer-events: none;
+  }
+
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: var(--accent, #007bff);
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+  z-index: 78730;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: 0.3s ease;
+}
