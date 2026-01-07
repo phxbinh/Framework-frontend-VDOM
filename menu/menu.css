@@ -1,0 +1,147 @@
+
+
+  body { font-family: sans-serif; margin: 0; padding: 10px; background: #f7f7f7; }
+  nav a { margin-right: 14px; }
+
+.burger-nav a {
+  display: block;
+  padding: 14px 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+/* nav style */
+.nav {
+  height: 52px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  background-color: var(--bg);
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: background-color var(--transform-slow);
+}
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.burger-btn {
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+/* -------- overlay -------- */
+.burger-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  opacity: 0;
+  animation: fadeIn .25s forwards;
+}
+
+.burger-root {
+  z-index: 1000;
+}
+
+/* -------- sidebar right -------- */
+.burger-sidebar-right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 280px;
+  background-color: var(--bg);
+  transform: translateX(100%);
+  transition: transform var(--transition-fast-out);
+  box-shadow: -2px 0 8px rgba(0,0,0,.15);
+
+  /* thêm 2 dòng này */
+  overflow-y: auto;
+  height: 100%;
+}
+
+@media (min-width: 680px) {
+  .burger-sidebar-right {
+    overflow-y: auto;
+    height: 100%;
+  }
+}
+
+.burger-sidebar-right.open {
+  transform: translateX(0);
+}
+
+/* -------- header -------- */
+.burger-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+/* -------- main nav -------- */
+.burger-nav a {
+  display: block;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+/* -------- submenu title -------- */
+.submenu-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-weight: 500;
+  user-select: none;
+}
+
+.arrow {
+  transition: transform .4s ease;
+}
+
+.arrow.up {
+  transform: rotate(90deg);
+}
+
+/* -------- submenu content box with animation -------- */
+.submenu-box {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease, opacity .48s ease;
+  opacity: 0;
+  background-color: var(--bg);
+  width: 100%;
+}
+
+.submenu-box.open {
+  max-height: 250px; /* đủ lớn để chứa item */
+  opacity: 1;
+}
+
+.submenu-box a {
+  padding: 12px 30px;
+  font-size: 14px;
+  border-bottom: 1px dashed #eee;
+  display: block;
+}
+
+/* overlay fade animation */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
