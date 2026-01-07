@@ -1,0 +1,17 @@
+
+
+  .acc-root input { padding: 8px; margin-top:10px; width: 200px; font-size: 16px; }
+
+
+  .acc-root { max-width:780px; margin:18px auto; }
+  .acc-card { background:var(--bg); border-radius:8px; margin:10px 10px; padding:0; box-shadow:0 6px 18px rgba(2,6,23,0.06); overflow:hidden; transition: background 0.28s, border 0.28s; box-shadow: 0 2px 6px var(--shadow);}
+  .acc-title { display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none; padding:10px 15px; font-size:15px; background:var(--bg);}
+  .acc-title h3 { margin:0; }
+  .acc-chev { transition: transform .28s ease; display:inline-block; transform-origin:center; }
+  .acc-chev.open { transform: rotate(90deg); }
+  .acc-panel { height:0; overflow:hidden; }
+  .acc-panel-inner { padding:10px 15px; color:var(--text); line-height:1.45; }
+  .acc-card.highlight { border:1px solid #007bff; background:var(--bg); color: var(--text);}
+  input.acc-search { width:92%; padding:6px 10px; margin-bottom:12px; font-size:16px; }
+
+
