@@ -1,0 +1,228 @@
+/* Modal */
+/* ====================== MODAL BASE ====================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* top:0; left:0; right:0; bottom:0 */
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalOverlayFadeIn 0.25s ease-out forwards;
+}
+
+.modal-overlay.modal-leave {
+  animation: modalOverlayFadeOut 0.25s ease-out forwards;
+}
+
+/* Modal chính */
+.modal {
+  background: #ffffff;
+  border-radius: 12px;
+  width: min(90vw, 480px);
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  animation-duration: 0.25s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+/* Trạng thái chuẩn bị enter (ẩn hoàn toàn) */
+.modal-pre-enter {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+/* Animation vào */
+.modal-enter {
+  animation-name: modalSlideIn;
+}
+
+/* Animation ra */
+.modal-leave {
+  animation-name: modalSlideOut;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modalSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+}
+
+@keyframes modalOverlayFadeIn {
+  from { background: rgba(0, 0, 0, 0); }
+  to   { background: rgba(0, 0, 0, 0.45); }
+}
+
+@keyframes modalOverlayFadeOut {
+  from { background: rgba(0, 0, 0, 0.45); }
+  to   { background: rgba(0, 0, 0, 0); }
+}
+
+/* ====================== MODAL STRUCTURE ====================== */
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #262626;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #8c8c8c;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #f5f5f5;
+  color: #595959;
+}
+
+.close-btn:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+}
+
+.modal-body {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  color: #595959;
+  line-height: 1.5;
+}
+
+/* Scrollbar đẹp (WebKit) */
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+/* ====================== CONFIRM MODAL SPECIFIC ====================== */
+
+.modal-confirm-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px; /* nếu footer được render riêng trong body */
+}
+
+.btn {
+  padding: 8px 16px;
+  min-width: 80px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Button variants */
+.btn-primary {
+  background: #1677ff;
+  color: #ffffff;
+}
+
+.btn-danger {
+  background: #ff4d4f;
+  color: #ffffff;
+}
+
+.btn-cancel {
+  background: #f5f5f5;
+  color: #595959;
+}
+
+/* Nếu bạn muốn thứ tự button theo kiểu Việt Nam (Huỷ bên phải, Xác nhận bên trái) */
+.modal-confirm-footer.vietnam-order {
+  flex-direction: row-reverse;
+}
+
+/* Responsive nhỏ hơn */
+@media (max-width: 480px) {
+  .modal {
+    width: 95vw;
+    border-radius: 12px;
+  }
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 16px;
+  }
+  .modal-confirm-footer {
+    flex-direction: column;
+  }
+  .btn {
+    width: 100%;
+  }
+}
