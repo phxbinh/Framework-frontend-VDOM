@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+<title>#myframework SPA Demo</title>
+
+<link rel="stylesheet" href="./styles/varStyle.css">
+<link rel="stylesheet" href="./themeAPI/themeSwitch.css">
+<link rel="stylesheet" href="./menu/menu.css">
+<link rel="stylesheet" href="./styles/accountStyle.css">
+<link rel="stylesheet" href="./styles/postStyle.css">
+<link rel="stylesheet" href="./styles/debugPanel.css">
+<link rel="stylesheet" href="./componentpost/editpost.css">
+<link rel="stylesheet" href="./backToTop/backToTop.css">
+
+<link rel="stylesheet" href="./FAQ/FAQ.css">
+
+<link rel="stylesheet" href="./ToastModal/toast.css">
+<link rel="stylesheet" href="./ToastModal/modal.css">
+
+<style>
+
+/* Container chung */
+.post-all {
+  display: grid;
+  grid-template-columns: 1fr; /* mặc định 1 cột */
+  gap: 16px; /* khoảng cách giữa các item */
+  padding: 16px 0;
+}
+
+/* Tablet: 2 cột */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .post-all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Laptop trở lên: 3 cột */
+@media (min-width: 1025px) {
+  .post-all {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tùy chọn thêm: style card bên trong */
+.post-all .card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+}
+</style>
+
+  <script>
+    // Link CSS CDN cho FontAwesome
+    // Tạo icon khi thay đổi theme: dark/light
+    const linkId = "fa-cdn-for-icon-cheat";
+    if (!document.getElementById(linkId)) {
+      const link = document.createElement("link");
+      link.id = linkId;
+      link.rel = "stylesheet";
+      link.href = "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css";
+      document.head.appendChild(link);
+    }
+  </script>
+<!-- Framework -->
+<script src="./framework/Debugger.js"></script>
+<script src="./framework/vdom.js"></script>
+<script src="./framework/hooks.js"></script>
+<script src="./framework/router.js"></script>
+<!---->
+
+<!-- Add API from framework -->
+<script src="./framework/init_API.js"></script>
+<!---->
+
+<!-- Helpers -->
+<script src="./helpers/generateExcerptByWords.js"></script>
+<script src="./helpers/debounce.js"></script>
+<script src="./helpers/timeVNFormate.js"></script>
+<script src="./helpers/copyLocal.js"></script>
+<!---->
+
+<!-- Mock DB -->
+<script src="./DBAPI/DBPostStore.js"></script>
+<script src="./DBAPI/DBStorage.js"></script>
+<!---->
+
+<!-- State for front end -->
+<script src="./initialState/initialState.js"></script>
+<!---->
+
+<!-- Theme change -->
+<script src="./themeAPI/themeAPI.js"></script>
+<script src="./themeAPI/themeInit.js"></script>
+<!---->
+
+<!-- UI back to top scroll -->
+<script src="./backToTop/backToTop.js"></script>
+<!---->
+
+<!-- Repository data -->
+<script src="./repoData/repoData.js"></script>
+<!---->
+
+<!-- Cache for frontend -->
+<script src="./initialState/initialState.js"></script>
+<!---->
+
+<!-- Reducer -->
+<script src="./reducer/reducer.js"></script>
+<!---->
+
+<!-- Bootstrap -->
+<script src="./store/store.js"></script>
+<script src="./bootstrap/reloadAuth.js"></script>
+<script src="./bootstrap/restore.js"></script>
+<!---->
+
+<!-- Actions -->
+<script src="./actions/actions.js"></script>
+<!---->
+
+<!-- Toast and Modal -->
+<script src="./ToastModal/toast.js"></script>
+<script src="./ToastModal/UI_Base_Modal.js"></script>
+<!---->
+
+<!-- Post component -->
+<script src="./componentpost/postitem.js"></script>
+<script src="./componentpost/postpage.js"></script>
+
+<script src="./componentpost/editpost.js"></script>
+<script src="./componentpost/detail.js"></script>
+<script src="./componentpost/composer.js"></script>
+<!---->
+
+<!-- Account component -->
+<script src="./componentuser/register.js"></script>
+<script src="./componentuser/login.js"></script>
+<script src="./componentuser/accountsetting.js"></script>
+<script src="./componentuser/accountsettingprofile.js"></script>
+<script src="./componentuser/accountsettingpassword.js"></script>
+<!---->
+
+<!-- Component content type detail summary -->
+<script src="./FAQ/FAQ.js"></script>
+<!---->
+
+<!-- Adminatrate for data of App -->
+<script src="./manageAdmin/manageAdmin.js"></script>
+<script src="./manageAdmin/debugPanel.js"></script>
+<!---->
+
+<!-- Menu -->
+<script src="./menu/menu.js"></script>
+<!---->
+
+</head>
+<body>
+
+<!---->
+<div id="top-sentinel"></div>
+<button id="backToTop" class="back-to-top">↑ Top</button>
+<!---->
+
+<div id="app"></div>
+
+
+
+<script>
+// ==========================
+// 7) COMPONENTS
+// ==========================
+
+// 🎾Home logic - component ---------
+function useHomeLogic() {
+  const auth = App.useStore(s => s.auth)
+  return {
+    auth
+  }
+}
+
+function Home() {
+  const { auth } = useHomeLogic();
+  return h("div", { class: "card" }, [
+    h("h2", null, "Home"),
+    auth.user
+      ? h("p", null, "Xin chào, " + auth.user.name)
+      : h("p", null, "Bạn chưa đăng nhập."),
+  ]);
+}
+// --------------------------------⛳️ //
+
+// 🎾Counter logic component -----------
+// Phần xử lý interface và logic -------
+function useCounterLogic({ value, inc, dec, reset }) {
+  return { value, inc, dec, reset };
+}
+
+function useCounterController() {
+  const value = App.useStore(s => s.counter.value);
+  const actions = App.Actions.Counter;
+
+  return useCounterLogic({
+    value,
+    inc: actions.inc,
+    dec: actions.dec,
+    reset: actions.reset
+  });
+}
+
+// Phần xử lý UI -----
+function CounterPage() {
+  const { value, inc, dec, reset } = useCounterController();
+
+  return h("div", { class: "card" }, [
+    h("h2", null, "Counter"),
+    h("p", null, "Giá trị: " + value),
+    h("button", { onclick: dec }, "-"),
+    h("button", { onclick: inc, style: "margin-left: 8px;" }, "+"),
+    h("button", { onclick: reset, style: "margin-left: 8px;" }, "Reset"),
+    h(Fragment, null, [ h(FAQDemo) ])
+  ]);
+}
+// --------------------------------⛳️ //
+
+
+// ==========================
+// 8) ROUTES
+// ==========================
+const routeConfig = {
+  path: "/",
+  component: Home,
+  children: [
+    { path: "login",
+      component: LoginPage },
+    { path: "register",
+      component: Register },
+    { path: "counter",
+      component: CounterPage },
+    { path: "postsnew",
+      component: PostPage,
+      children: [
+        { path: "edit",
+          //component: PostEdit,
+          children: [
+            {path: ":id",
+             component: EditPost}
+          ]
+        },
+        { path: ":id",
+          component: PostDetail }
+      ]
+    },
+    {
+      path: "settings",
+      component: AccountSetting,
+    },
+    {
+      path: "userslist",
+      component: UserList,
+    },
+    {
+      path: "postslist",
+      component: PostList,
+    },
+    {
+      path: "renderobjectusers",
+      component: RenderObject,
+    },
+    {
+      path: "authlogin",
+      component: AuthLogin,
+    },
+    {
+      path: "debugpanel",
+      component: DebugPanel,
+    },
+    {
+      path: "composertest",
+      component: ComposerTest,
+    }
+  ]
+};
+
+// Khởi tạo routes
+App.Router.addRoute(routeConfig);
+
+// ==========================
+// 9) RENDER ROUTER
+// ==========================
+App.Router.init(document.getElementById("app"), { hash: true });
+
+</script>
+
+</body>
+</html>
+
