@@ -1,0 +1,39 @@
+/* EDIT POST */
+.card .post {
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.edit-post .avatar-preview-wrap {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.edit-post .avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.edit-post .small-note {
+  font-size: 12px;
+  /*opacity: 0.7;*/
+  margin-top: 4px;
+}
+
+.edit-post .form-row {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-post textarea.big {
+  min-height: 160px;
+}
+
+.edit-post > .form-row > input {
+  width: 95%;
+}
