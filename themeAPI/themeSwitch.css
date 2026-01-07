@@ -1,0 +1,98 @@
+/* THEME SYSTEM BUTTON */
+#themeAuto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  position: fixed;
+  bottom: 50px;
+  left: 20px;
+
+  width: 55px;
+  height: 26px;
+  font-size: 12px;
+  border-radius: 13px;
+  opacity: 0.8;
+}
+
+/* =====================
+   THEME SWITCH BUTTON
+===================== */
+.tv-theme-switch {
+  width: 52px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+
+  transition: background 0.25s ease, border 0.25s ease;
+
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2500;
+}
+
+/* Font Awesome icons inside switch */
+.tv-theme-switch .fa-moon,
+.tv-theme-switch .fa-sun {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.fa-sun {
+  color: yellow !important;
+}
+
+.tv-theme-switch .fa-moon {
+  left: 8px;
+  /*color: #e5e7eb;*/
+  color: black;
+}
+
+.tv-theme-switch .fa-sun {
+  right: 8px;
+  color: #facc15;
+}
+
+/* Thumb */
+.switch-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e5e7eb;
+
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  transition: transform 0.45s ease, background 0.25s ease;
+}
+
+/* ☀️ Light mode */
+[data-theme="light"] .tv-theme-switch {
+  background: #e5e7eb;
+  border-color: var(--border);
+}
+
+[data-theme="light"] .switch-thumb {
+  /*background: #facc15;*/
+  background: black;
+  transform: translate(26px, -50%);
+}
+
+/* Hover */
+.tv-theme-switch:hover {
+  opacity: 0.9;
+}
